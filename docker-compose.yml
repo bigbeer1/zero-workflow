@@ -1,0 +1,119 @@
+version: '3'
+
+
+networks:
+  zero-workflow:
+    ipam:
+      config:
+        - subnet: 172.20.1.0/16
+
+
+services:
+  nginx-gateway:
+    image: nginx:1.21.5
+    container_name: nginx-gateway
+    restart: always
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 9005:9005
+    volumes:
+      - ./deploy/nginx/conf.d:/etc/nginx/conf.d
+      - ./data/nginx/log:/var/log/nginx
+    networks:
+      - zero-workflow
+    depends_on:
+      - golang
+
+  #前端api + 业务rpc
+  golang:
+    image: lyumikael/gomodd:v1.0.0
+    container_name: golang
+    environment:
+      # 时区上海
+      TZ: Asia/Shanghai
+      GOPROXY: https://goproxy.cn,direct
+    working_dir: /go/app
+    volumes:
+      - ./deploy/app:/go/app
+      - ./deploy/time/localtime:/etc/localtime
+    privileged: true
+    restart: always
+    networks:
+      - zero-workflow
+    tty: true
+
+  portainer:
+     image: portainer/portainer
+     container_name: portainer
+     volumes:
+       - /var/run/docker.sock:/var/run/docker.sock
+       - ./data/portainer/data:/data
+       - ./deploy/portainer/public:/public
+     ports:
+       - 9001:9000
+     privileged: true
+     restart: always
+     networks:
+      - zero-workflow
+  redis: # 服务名称
+    image: redis:6.2.6 # 创建容器时所需的镜像
+    container_name: redis # 容器名称
+    restart: always
+    networks:
+      - zero-workflow
+    environment:
+      - REDISCLI_AUTH=admin123456
+    ports:
+      - "36379:6379"
+  etcd: # etcd注册中间
+    image: bitnami/etcd
+    container_name: etcd
+    environment:
+      - TZ=Asia/Shanghai
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+    ports: # 设置端口映射
+      - "2379:2379"
+    networks:
+      - zero-workflow
+    restart: always
+
+  etcd-manager:
+    image: evildecay/etcdkeeper
+    container_name: etcd-manager
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+    networks:
+      - zero-workflow
+    ports:
+      - "7000:8080"
+
+  mysql:
+      image: mysql/mysql-server:8.0.28
+      container_name: mysql
+      environment:
+        # 时区上海
+        TZ: Asia/Shanghai
+        # root 密码
+        MYSQL_ROOT_PASSWORD: PXDNKKK1234
+
+      ports:
+        - 33069:3306
+      volumes:
+        # 数据挂载
+        - ./data/mysql/data:/var/lib/mysql
+        # 日志
+      command:
+        # 将mysql8.0默认密码策略 修改为 原先 策略 (mysql8.0对其默认策略做了更改 会导致密码无法匹配)
+        --default-authentication-plugin=mysql_native_password
+        --character-set-server=utf8mb4
+        --collation-server=utf8mb4_general_ci
+        --explicit_defaults_for_timestamp=true
+        --lower_case_table_names=1
+      privileged: true
+      restart: always
+      networks:
+        - zero-workflow

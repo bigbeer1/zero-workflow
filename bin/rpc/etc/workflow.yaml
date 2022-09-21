@@ -1,0 +1,21 @@
+Name: workflow.rpc
+ListenOn: 127.0.0.1:1104
+
+Timeout: 50000000
+
+Etcd:
+  Hosts:
+    - 127.0.0.1:2379
+  Key: workflow.rpc
+
+Mysql:
+  DataSource: root:PXDNA93V@RKOOOOO@tcp(127.0.0.1:33069)/workflow?charset=utf8mb4&parseTime=true
+
+# 我写的cluster模式  请根据自身情况修改
+CacheRedis:
+  - Host: 127.0.0.1:36379
+    Type: node
+    Pass: "admin123456"
+
+
+

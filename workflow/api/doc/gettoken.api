@@ -1,0 +1,21 @@
+syntax = "v1"
+
+
+type (
+    getTokenRequest {
+        Uid string `form:"uid"`                                  // 用户UID
+        NickName string `form:"nick_name"`                       // 用户昵称
+        TenantId string `form:"tenant_id"`                       // 租户ID
+    }
+)
+
+@server(
+    group: GetToken
+)
+
+service Workflow {
+
+    // 获取token
+    @handler GetToken
+    get /getToken (getTokenRequest) returns (Response)
+}

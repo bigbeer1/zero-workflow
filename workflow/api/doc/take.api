@@ -1,0 +1,39 @@
+syntax = "v1"
+
+info(
+    title: "type title here"
+    desc: "type desc here"
+    author: "type author here"
+    email: "type email here"
+    version: "type version here"
+)
+
+
+type TaskCompleteReq {
+    taskId string `json:"task_id"`            // 流程id
+    pass bool `json:"pass"`                   // 标题
+    comment string `json:"comment"`           // 启动添加数据
+}
+
+type TaskListByUserIdReq {
+    Current int64 `form:"current,default=1,optional"`                                          //页码
+    PageSize int64 `form:"page_size,default=5,optional"`                                      //数据量
+}
+
+@server(
+    jwt: Auth
+    group: Take
+)
+
+service Workflow {
+    // 审批
+    @handler TaskComplete
+    post /task/complete (TaskCompleteReq) returns (Response)
+
+    // 查询个人审批
+    @handler TaskListByUserId
+    get /task (TaskListByUserIdReq) returns (Response)
+
+
+}
+

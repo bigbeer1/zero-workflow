@@ -1,0 +1,45 @@
+syntax = "v1"
+
+
+type (
+
+    ProcinstFindListRequest {
+        Current int64 `form:"current,default=1,optional"`
+        PageSize int64 `form:"page_size,default=10,optional"`
+        ProcType string `form:"proc_type,optional"`              // 流程类型
+        ProcdefName string `form:"procdef_name,optional"`       // 流程名
+        Title string `form:"title,optional"`                      // 标题
+        StartTime int64 `form:"start_time,optional"`            // 开始时间
+        EndTime int64 `form:"end_time,optional"`                // 结束时间
+        StartUserName string `form:"start_user_name,optional"`  // 开始用户名
+        IsFinished int64 `form:"is_finished,optional"`  // 是否结束
+    }
+
+    ProcinstInfoRequest {
+        Id string `path:"id"`
+    }
+
+    ProcinstCloseRequest {
+        Id string `path:"id"`
+    }
+
+
+)
+
+
+@server(
+    jwt: Auth
+    group: Procinst
+)
+
+service Workflow {
+
+    @handler ProcinstFindList
+    get /procinst (ProcinstFindListRequest) returns (Response)
+
+    @handler ProcinstInfo
+    get /procinstInfo/:id (ProcinstInfoRequest) returns (Response)
+
+    @handler ProcinstClose
+    post /procinstClose/:id  (ProcinstCloseRequest) returns (Response)
+}

@@ -1,0 +1,684 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "工作流",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "工作流微服务"
+    },
+    {
+      "name": "工作流微服务/procdef"
+    },
+    {
+      "name": "工作流微服务/take"
+    },
+    {
+      "name": "工作流微服务/procInst"
+    }
+  ],
+  "paths": {
+    "/procinst": {
+      "get": {
+        "summary": "查询流程实例",
+        "x-apifox-folder": "工作流微服务/procInst",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "工作流微服务/procInst"
+        ],
+        "parameters": [
+          {
+            "name": "current",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "10",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "proc_type",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "procdef_name",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start_time",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "end_time",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_user_name",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "is_finished",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task": {
+      "get": {
+        "summary": "查询自己的任务",
+        "x-apifox-folder": "工作流微服务/take",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "工作流微服务/take"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/procdefInfo/{id}": {
+      "get": {
+        "summary": "查询流程Id详细信息",
+        "x-apifox-folder": "工作流微服务/procdef",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "工作流微服务/procdef"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/procdef": {
+      "get": {
+        "summary": "查询流程",
+        "x-apifox-folder": "工作流微服务/procdef",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "工作流微服务/procdef"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "添加流程",
+        "x-apifox-folder": "工作流微服务/procdef",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "工作流微服务/procdef"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ],
+                    "x-apifox-orders": [
+                      "name"
+                    ],
+                    "x-apifox-ignore-properties": []
+                  },
+                  "proc_type": {
+                    "type": "string"
+                  },
+                  "resource": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "node_id": {
+                        "type": "string"
+                      },
+                      "assignee_id": {
+                        "type": "string"
+                      },
+                      "assignee_name": {
+                        "type": "string"
+                      },
+                      "childNode": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "prev_id": {
+                            "type": "string"
+                          },
+                          "node_id": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "assignee_id": {
+                            "type": "string"
+                          },
+                          "assignee_name": {
+                            "type": "string"
+                          },
+                          "childNode": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "prev_id": {
+                                "type": "string"
+                              },
+                              "node_id": {
+                                "type": "string"
+                              },
+                              "assignee_id": {
+                                "type": "string"
+                              },
+                              "assignee_name": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "prev_id",
+                              "node_id",
+                              "assignee_id",
+                              "assignee_name",
+                              "type"
+                            ],
+                            "x-apifox-orders": [
+                              "name",
+                              "prev_id",
+                              "node_id",
+                              "assignee_id",
+                              "assignee_name",
+                              "type"
+                            ],
+                            "x-apifox-ignore-properties": []
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "prev_id",
+                          "node_id",
+                          "type",
+                          "assignee_id",
+                          "assignee_name",
+                          "childNode"
+                        ],
+                        "x-apifox-orders": [
+                          "name",
+                          "prev_id",
+                          "node_id",
+                          "type",
+                          "assignee_id",
+                          "assignee_name",
+                          "childNode"
+                        ],
+                        "x-apifox-ignore-properties": []
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "type",
+                      "node_id",
+                      "assignee_id",
+                      "assignee_name",
+                      "childNode"
+                    ],
+                    "x-apifox-orders": [
+                      "name",
+                      "type",
+                      "node_id",
+                      "assignee_id",
+                      "assignee_name",
+                      "childNode"
+                    ],
+                    "x-apifox-ignore-properties": []
+                  }
+                },
+                "required": [
+                  "name",
+                  "data",
+                  "proc_type",
+                  "resource"
+                ],
+                "x-apifox-orders": [
+                  "name",
+                  "data",
+                  "proc_type",
+                  "resource"
+                ],
+                "x-apifox-ignore-properties": []
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/process/start": {
+      "post": {
+        "summary": "启动流程",
+        "x-apifox-folder": "工作流微服务/procdef",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "工作流微服务/procdef"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "prodef_id": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "prodef_id",
+                  "title"
+                ],
+                "x-apifox-orders": [
+                  "prodef_id",
+                  "title"
+                ],
+                "x-apifox-ignore-properties": []
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/procinstInfo/{id}": {
+      "get": {
+        "summary": "查询流程实例详细信息",
+        "x-apifox-folder": "工作流微服务/procInst",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "工作流微服务/procInst"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/procinstClose/{id}": {
+      "post": {
+        "summary": "关闭流程",
+        "x-apifox-folder": "工作流微服务/procInst",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "工作流微服务/procInst"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task/complete": {
+      "post": {
+        "summary": "审批",
+        "x-apifox-folder": "工作流微服务/take",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "工作流微服务/take"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "task_id": {
+                    "type": "string"
+                  },
+                  "pass": {
+                    "type": "boolean"
+                  },
+                  "comment": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "task_id",
+                  "pass",
+                  "comment"
+                ],
+                "x-apifox-orders": [
+                  "task_id",
+                  "pass",
+                  "comment"
+                ],
+                "x-apifox-ignore-properties": []
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SchedulingAddList": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "time": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "start_time": {
+              "type": "integer"
+            },
+            "end_time": {
+              "type": "integer"
+            },
+            "team_id": {
+              "type": "string"
+            },
+            "colour": {
+              "type": "string"
+            },
+            "user_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "time",
+            "name",
+            "start_time",
+            "end_time",
+            "team_id",
+            "colour",
+            "user_ids"
+          ],
+          "x-apifox-orders": [
+            "time",
+            "name",
+            "start_time",
+            "end_time",
+            "team_id",
+            "colour",
+            "user_ids"
+          ],
+          "x-apifox-ignore-properties": []
+        },
+        "x-apifox-folder": ""
+      }
+    }
+  }
+}

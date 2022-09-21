@@ -1,0 +1,21 @@
+Name: workflow-api
+Host: 0.0.0.0
+Port: 1004
+Mode: dev
+
+
+Log:
+  ServiceName: workflow-api
+  Level: info
+
+
+Auth:
+  AccessSecret: ABC123456
+  AccessExpire: 86400
+
+
+WorkflowRpc:
+  Etcd:
+    Hosts:
+      - etcd:2379
+    Key: workflow.rpc

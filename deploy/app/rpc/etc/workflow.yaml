@@ -1,0 +1,23 @@
+Name: workflow.rpc
+ListenOn: 0.0.0.0:1104
+Mode: dev
+
+Log:
+  ServiceName: workflow.rpc
+  Level: info
+
+
+Etcd:
+  Hosts:
+    - etcd:2379
+  Key: workflow.rpc
+
+Mysql:
+  DataSource: root:PXDNKKK1234@tcp(mysql:3306)/workflow?charset=utf8mb4&parseTime=true
+
+
+CacheRedis:
+  - Host: redis:6379
+    Type: node
+    Pass: "admin123456"
+

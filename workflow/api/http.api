@@ -1,0 +1,26 @@
+syntax = "v1"
+
+info(
+	title: "用户微服务"
+	author: "陈国栋"
+	email: "747321301@qq.com"
+	desc: "用户微服务"
+	version: "V1"
+	createTime: "2022-03-22"
+	updateTime: ""
+)
+
+type (
+	Response {
+		Code int         `json:"code"`
+		Msg  string      `json:"msg"`
+		Data interface{} `json:"data"`
+	}
+)
+
+import (
+	"doc/procdef.api"
+	"doc/procinst.api"
+	"doc/take.api"
+	"doc/gettoken.api"
+)

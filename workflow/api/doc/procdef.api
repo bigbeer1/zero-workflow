@@ -1,0 +1,48 @@
+syntax = "v1"
+
+
+type (
+    ProcdefAddRequest {
+        Name string `json:"name"`                                // 流程名称
+        ProcType string `json:"proc_type"`                       // 流程类型
+        Data map[string]interface{} `json:"data"`                // 数据
+        Resource map[string]interface{} `json:"resource"`        // 流程内容
+    }
+
+    ProcdefListRequest {
+        Current int64 `form:"current,default=1,optional"`
+        PageSize int64 `form:"page_size,default=10,optional"`
+        ProcType string `form:"proc_type,optional"`
+        Name string `form:"name,optional"`
+    }
+
+    ProcdefInfoRequest {
+        Id string `path:"id"`
+    }
+
+    ProcessStartRequest  {
+        ProcdefId string `json:"procdef_id"`          // 流程id
+        Title string `json:"title"`                 // 标题
+    }
+
+)
+
+@server(
+    jwt: Auth
+    group: Procdef
+)
+
+service Workflow {
+    @handler ProcdefAdd
+    post /procdef (ProcdefAddRequest) returns (Response)
+
+    @handler ProcdefList
+    get /procdef (ProcdefListRequest) returns (Response)
+
+    @handler ProcdefInfo
+    get /procdefInfo/:id (ProcdefInfoRequest) returns (Response)
+
+    @handler ProcessStart
+    post /process/start (ProcessStartRequest) returns (Response)
+
+}

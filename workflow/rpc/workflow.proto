@@ -1,0 +1,258 @@
+syntax = "proto3";
+
+package workflowclient;
+
+option go_package = "./workflowclient";
+
+
+// 通用空返回
+message CommonResp{
+
+}
+
+
+//流程定义 start---------------------
+message ProcdefAddReq{
+  string created_name = 1; // 创建人
+  string name = 2; // 流程名称
+  string data = 3; // 流程内容
+  string proc_type = 4; // 流程类型
+  string resource = 5; // 流程内容
+  string tenant_id = 6; // 租户id
+}
+
+message ProcdefDeleteReq{
+  string id = 1; // 删除id
+  string tenant_id = 2; // 租户id
+}
+
+message ProcdefFindListReq{
+  int64  current = 1;
+  int64 page_size = 2;
+  string name = 3; // 流程名称
+  string proc_type = 4; // 流程名称
+  string tenant_id = 5; // 租户id
+}
+
+
+message ProcdefFindListResp{
+  int64 total = 1;
+  repeated ProcdefListData list = 2;
+}
+
+message ProcdefListData{
+  string id = 1; // 流程id
+  int64 created_at = 2; // 创建时间
+  string created_name = 3; // 创建人
+  string name = 4; // 流程名称
+  string proc_type = 5; // 流程类型
+}
+
+
+message ProcdefFindOneReq{
+  string id = 1;
+  string tenant_id = 2; // 租户id
+}
+
+
+message ProcdefFindOneResp{
+  string id = 1; // 流程id
+  int64 created_at = 2; // 创建时间
+  string created_name = 3; // 创建人
+  string data = 4;  //内容
+  string name = 5; // 流程名称
+  string proc_type = 6; // 流程类型
+  string resource = 7; // 流程类型
+}
+
+message ProcessStartReq{
+  string procdef_id = 1; // 流程id
+  string procinst_id = 2; // 流程实例id
+  string title = 3; // 标题
+  string user_id = 4; // 用户ID
+  string nick_name = 5; // 用户昵称
+  string tenant_id = 6; // 租户id
+  bytes procdefdata=7 ; //procdef对象
+}
+
+//流程定义 end---------------------
+
+
+
+//流程实例 start---------------------
+
+message ProcinstFindOneReq{
+  string  id = 1;
+}
+
+message ProcinstFindOneResp{
+  string id = 1; // 流程实例id
+  string proc_type = 2; // 流程类型
+  string procdef_name = 3; // 流程名
+  string title = 4; // 标题
+  int64 start_time = 5; // 开始时间
+  int64 end_time = 6; // 结束时间
+  string start_user_id = 7; // 开始用户id
+  string start_user_name = 8; // 开始用户名
+  int64 is_finished = 9; // 是否完成
+  string task_id = 10; //9; // 是否完成
+  string node_id = 11; // 是否完成
+  string node_name = 12; // 节点名字
+  string node_type = 13; // 节点类型
+  int64 step = 14; // 第几步
+  string assignee_id = 15; // 审批人名
+  string assignee_name = 16; // 审批人名
+}
+
+message ProcinstFindListReq{
+  int64  current = 1;
+  int64 page_size = 2;
+  string proc_type = 3; // 流程类型
+  string procdef_name = 4; // 流程名
+  string title = 5; // 标题
+  int64 start_time = 6; // 开始时间
+  int64 end_time = 7; // 结束时间
+  string start_user_name = 8; // 开始用户名
+  int64 is_finished = 9; // 是否完成
+  string tenant_id = 10; // 租户id
+}
+
+message ProcinstFindListResp{
+  int64 total = 1;
+  repeated ProcinstListData list = 2;
+}
+
+
+message ProcinstListData{
+  string id = 1; // 流程实例id
+  string proc_type = 2; // 流程类型
+  string procdef_name = 3; // 流程名
+  string title = 4; // 标题
+  int64 start_time = 5; // 开始时间
+  int64 end_time = 6; // 结束时间
+  string start_user_id = 7; // 开始用户id
+  string start_user_name = 8; // 开始用户名
+  int64 is_finished = 9; // 是否完成
+  string task_id = 10; //9; // 是否完成
+  string node_id = 11; // 是否完成
+  string node_name = 12; // 节点名字
+  string node_type = 13; // 节点类型
+  int64 step = 14; // 第几步
+  string assignee_id = 15; // 审批人名
+  string assignee_name = 16; // 审批人名
+}
+
+message ProcinstCloseReq{
+  string  id = 1;
+  string  user_id = 2;
+  string  user_name = 3;
+  string  tenant_id = 4;
+}
+
+
+//流程实例 end---------------------
+
+
+//任务 start---------------------
+message TaskCompleteReq{
+  string task_id = 1; // 任务ID
+  string user_id = 2; // 租户id
+  string user_name = 3; // 租户id
+  bool pass = 4; // 是否通用
+  string comment = 5; // 是否通用
+  string tenant_id = 6; // 租户id
+}
+
+message TaskFindListByUserIdReq{
+  int64  current = 1;
+  int64 page_size = 2;
+  string user_id = 3; // 租户id
+}
+
+message TaskFindListByUserIdResp{
+  int64 total = 1;
+  repeated TaskListData list = 2;
+}
+
+message TaskListData{
+  string task_id = 1; // 任务ID
+  string procinst_id = 2;  // 流程实例ID
+  int64 created_at = 3;  // Task创建时间
+  string node_id = 4;   // 当前执行流所在的节点ID
+  int64 step = 5; // 第几步
+  string agree_num = 6;   //同意数
+  string proc_type = 7;  // 流程类型
+  string procinst_name = 8;   //  流程名
+  string procinst_title = 9; //流程标题
+  int64 start_time = 10; // 开始时间
+  string start_user_name = 11; //  创建人名
+  string start_user_id = 12; // 创建人Id
+}
+
+message  TaskFindListByProcinstIdReq{
+  string procinst_id = 1;
+}
+
+message  TaskFindListByProcinstIdResp{
+  repeated TaskProcinstData list = 1;
+}
+
+message TaskProcinstData {
+  string task_id = 1; // 任务ID
+  int64 created_at = 2;  // take创建时间
+  int64 claim_time = 3; // take结束
+  string node_id = 4;  // 节点名
+  string node_name = 5;  // 节点名
+  string node_type = 6;  // 字节类型
+  int64 step = 7;  // 第几步
+  string assignee_name = 8; // 审批人
+  int64 is_finished = 9; // 是否完成
+  int64 is_agree = 10;  // 是否同意
+  string comment = 11;  // 提交内容
+}
+
+//任务 end---------------------
+
+
+message  ExecutionFindOneByProcinstIdReq{
+  string procinst_id = 1;
+  string tenant_id =2;
+}
+
+message  ExecutionFindOneByProcinstIdResp{
+  string id = 1; // 执行id
+  string procdef_name = 4; // 流程名
+  string node_infos = 5; // 节点信息
+  int64 start_time = 6; // 开始时间
+}
+
+
+service Workflow {
+  //-------------------------添加流程定义----------------------
+  rpc ProcdefAdd(ProcdefAddReq) returns(CommonResp);
+
+  rpc ProcdefDelete(ProcdefDeleteReq) returns(CommonResp);
+  rpc ProcdefFindList(ProcdefFindListReq) returns(ProcdefFindListResp);
+  rpc ProcdefFindOne(ProcdefFindOneReq) returns(ProcdefFindOneResp);
+  // 启动流程
+  rpc ProcessStart(ProcessStartReq) returns(CommonResp);
+
+  // -----------------------流程实例-----------------------
+  rpc ProcinstFindOne(ProcinstFindOneReq) returns(ProcinstFindOneResp);
+
+  rpc ProcinstFindList(ProcinstFindListReq) returns(ProcinstFindListResp);
+
+  rpc ProcinstClose(ProcinstCloseReq) returns(CommonResp);
+
+  // -----------------------任务--------------------------
+  rpc TaskComplete(TaskCompleteReq)returns(CommonResp);
+
+  rpc TaskFindListByUserId(TaskFindListByUserIdReq)returns(TaskFindListByUserIdResp);
+
+  rpc TaskFindListByProcinstId(TaskFindListByProcinstIdReq)returns(TaskFindListByProcinstIdResp);
+
+  // -----------------------实例内容-----------------------------
+  rpc ExecutionFindOneByProcinstId(ExecutionFindOneByProcinstIdReq)returns(ExecutionFindOneByProcinstIdResp);
+
+
+}
